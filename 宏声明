@@ -1,0 +1,29 @@
+UCLASS()   //Blueprintable   可被蓝图继承
+
+UE_Log(TempLog,Warnning,TEXT(""))  //在日志中打印文本
+
+
+UPROPERTY宏权限：
+
+EditAnywhere：属性可以在编辑器中修改
+BlueprintReadWrite：属性可以被蓝图读写
+VisibleAnywhere：属性可以在编辑器中查看
+BlueprintReadOnly：属性只能被蓝图读取
+EditDefaultsOnly：只有默认对象可以编辑属性
+EditInstanceOnly：只有实例对象可以编辑属性
+Category：属性在编辑器中的分类
+UFUNCTION宏权限：
+
+BlueprintCallable：函数可以被蓝图调用
+BlueprintPure：函数是纯函数，不修改对象状态
+BlueprintImplementableEvent：蓝图中可以实现该事件函数
+Exec：函数可以在控制台中执行
+Server：函数只能在服务器端执行
+Client：函数只能在客户端执行
+NetMulticast：函数可以在所有客户端和服务器上执行
+Reliable：函数需要可靠的网络连接
+Unreliable：函数不需要可靠的网络连接
+WithValidation：函数需要验证输入参数
+
+meta=(ClampMin=最小输入数值，ClampMax=最大输入数值，UIMin=最小可滑动数值，UIMax=最大可滑动数值)
+
