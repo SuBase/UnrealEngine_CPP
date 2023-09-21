@@ -1,0 +1,44 @@
+全局场景 需包头文件 Kismet/Kismet+=
+        UKismet SystemLibrary：提供了许多系统级别的函数，如获取当前时间、获取系统语言设置、打开网页等。
+    UKismet MathLibrary：提供了许多数学函数，如向量计算、矩阵计算、插值计算等。
+    UKismet InputLibrary：提供了许多输入相关的函数，如获取鼠标位置、获取按键状态、设置输入模式等。
+    UKismet StringLibrary：提供了许多字符串相关的函数，如字符串拼接、字符串替换、字符串分割等。
+    UKismet NodeHelperLibrary：提供了许多用于创建自定义 Kismet 节点的函数，如创建输入输出针脚、连接针脚等。
+        
+ 
+UGameplayStatics::
+        GetPlayerController：获取指定玩家的控制器对象。
+    GetPlayerPawn：获取指定玩家的角色对象。
+    SpawnEmitterAtLocation：在指定位置生成一个粒子特效。
+    ApplyDamage：对指定角色造成伤害。
+    PlaySoundAtLocation：在指定位置播放一个音效。
+    GetAllActorsOfClass：获取场景中指定类别的所有物体对象。   
+    ApplyRadialDamage：对指定位置周围的所有角色造成伤害。
+    LineTraceSingleByObjectType：从指定位置开始进行一条射线检测，并返回第一个被检测到的物体对象
+
+
+所有类可直接调用
+        GetWorld()：获取当前对象所在的世界对象。
+    GetName()：获取当前对象的名称。
+    GetClass()：获取当前对象所属的类。
+    GetOwner()：获取当前对象所属的拥有者对象。
+    SetActorLocation()：设置当前Actor对象的位置。
+    SetActorRotation()：设置当前Actor对象的旋转角度。
+    SetActorScale3D()：设置当前Actor对象的缩放比例。
+            Actor类：
+         SetActorLocation()：设置Actor对象的位置。
+         SetActorRotation()：设置Actor对象的旋转角度。
+         SetActorScale3D()：设置Actor对象的缩放比例。
+         GetActorLocation()：获取Actor对象的位置。
+         GetActorRotation()：获取Actor对象的旋转角度。
+         GetActorScale3D()：获取Actor对象的缩放比例。
+         GetAttachedActors()：获取与当前Actor对象关联的所有子对象。
+         GetComponentsByClass()：获取当前Actor对象中指定类型的所有组件。
+      Pawn类：
+         AddMovementInput()：添加指定方向和强度的移动输入。
+         GetMovementComponent()：获取Pawn对象的移动组件。
+      Character类：
+         Jump()：让角色跳跃。
+         Crouch()：让角色蹲下。
+         UnCrouch()：让角色站起来。
+         IsJumpProvidingForce()：判断角色是否正在跳跃。
