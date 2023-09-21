@@ -1,0 +1,126 @@
+//获取玩家控制器
+类名 APlayerController
+通用静态类 UGameplayStatics                                                 //内含游戏常用函数
+调用父类下的成员函数 GetPlayerController（this//世界所有任意类，0//索引）     //返回APlayerController ，内含成员函数 GetViewTarget() 
+APlayerController*OurPlayerController=UGamePlayStatics：：GetPlayerController（this，0）
+
+
+// 找出"前进"方向，并记录玩家想向该方向移动。
+FVector Direction = FRotationMatrix(Controller->GetControlRotation()).GetScaledAxis(EAxis::X);
+AddMovementInput(Direction, value);
+
+APawn* OtherPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 1);    // 获取场景中第一个Pawn对象
+
+
+GetWorld()->GetFirstActorOfClass<APawn>(APawn::StaticClass())  //这行代码的作用是在当前Pawn所在的世界（World）中查找第一个类型为APawn的Actor对象，并返回该对象的指针。
+具体来说，这行代码使用了以下两个函数：
+GetWorld()                                                     //函数：获取当前Pawn所在的世界对象（即UWorld类的实例）。
+GetFirstActorOfClass<APawn>(APawn::StaticClass())              //函数：在当前世界中查找第一个类型为APawn的Actor对象，并返回该对象的指针。
+其中，GetFirstActorOfClass 函数是一个泛型函数，其模板参数指定了要查找的Actor类型。在这里，模板参数为APawn，表示要查找类型为APawn的Actor对象。而APawn::StaticClass()则表示获取APawn类的元类对象，用于在运行时进行类型检查和转换。
+综上所述，这行代码的作用是查找当前Pawn所在世界中第一个类型为APawn的Actor对象，并返回该对象的指针。
+
+
+GetWorld()函数是UObject类的成员函数，因此只能在继承自UObject类的对象中调用，例如AActor、APawn、UActorComponent等等。该函数返回一个指向当前对象所在的世界（即UWorld类的实例）的指针。
+在UWorld类中，有许多其他有用的成员函数，以下是其中一些重要的成员函数：
+- SpawnActor()：                                                                   //在当前世界中生成一个新的Actor对象，并返回该对象的指针。
+- LineTraceSingleByChannel()：                                                     //在当前世界中进行一条射线检测，并返回检测结果。
+- GetTimeSeconds()：                                                               //获取当前世界的游戏时间（以秒为单位）。
+- GetFirstPlayerController()：                                                     //获取当前世界中第一个玩家控制器（即APlayerController类的实例）的指针。
+除了以上成员函数，UWorld类还有许多其他有用的成员变量和函数，例如存储所有Actor对象的数组、处理碰撞检测、处理关卡加载等等。
+
+AddForce()                                      //增加力
+AddTorque()                                     //使旋转  
+AddActorLocationOffset()                        //添加偏移
+AutoPossessPlayer=EAutoReceiveInput::Player0;   //设置默认玩家
+FTimerhandle                                    //句柄  需在h中声明 后在cpp定义
+弹簧臂组件->bEnableCameraLag=true                // 开启摄像机延迟
+弹簧臂组件->CameraLagSpeed=float                 //设置摄像机延迟速度  
+GetWordTimerManager().SetTimer(句柄,this,&A本类::AdvanceTimer,1.0f,true)    //1.0f指执行时间          AdvanceTimer指计时器绑定的函数   true指是否循环执行
+static ConstructorHelpers::FObjectFinder<UStaticMesh>StaticMeshAsset(TEXT("路径"))         //这是一个在UE4中用于查找静态网格模型资源的函数。它是通过提供资源路径来查找资源，并将其加载到一个UStaticMesh类型的对象中。在这个函数中使用了UE4的构造函数辅助器(ConstructorHelpers)，这个辅助器可以帮助我们在C++代码中查找和加载资源，而不需要手动编写代码来查找和加载资源。StaticMeshAsset 是名字。
+GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("We are using FPSCharacter."));   //添加屏幕调试消息
+
+
+
+
+
+本类名::NotifyActorBeginOverlap(AActor*OtherActor){                       //
+     Super::NotifyActorBeginOverlap（OtherActor）；                                             //
+          A+碰到的类的名  * name = Cast <A+碰到的类的名>(OtherActor);            //
+};                                                                       //作用   此Actor 与另一个Actor重叠时的触发事件  使用前提  bGenerateOverlapEvents必须为true
+
+
+
+
+
+1. 静态网格模型
+
+cpp
+// 查找并加载静态网格模型资源
+static ConstructorHelpers::FObjectFinder<UStaticMesh> StaticMeshAsset(TEXT("/Game/MyFolder/MyStaticMesh"));
+if (StaticMeshAsset.Succeeded())
+{
+    UStaticMesh* MyStaticMesh = StaticMeshAsset.Object;
+}
+
+2. 骨骼网格模型
+cpp
+// 查找并加载骨骼网格模型资源
+static ConstructorHelpers::FObjectFinder<USkeletalMesh> SkeletalMeshAsset(TEXT("/Game/MyFolder/MySkeletalMesh"));
+if (SkeletalMeshAsset.Succeeded())
+{
+    USkeletalMesh* MySkeletalMesh = SkeletalMeshAsset.Object;
+}
+
+3. 材质
+cpp
+// 查找并加载材质资源
+static ConstructorHelpers::FObjectFinder<UMaterial> MaterialAsset(TEXT("/Game/MyFolder/MyMaterial"));
+if (MaterialAsset.Succeeded())
+{
+    UMaterial* MyMaterial = MaterialAsset.Object;
+}
+
+4. 纹理
+cpp
+// 查找并加载纹理资源
+static ConstructorHelpers::FObjectFinder<UTexture2D> TextureAsset(TEXT("/Game/MyFolder/MyTexture"));
+if (TextureAsset.Succeeded())
+{
+    UTexture2D* MyTexture = TextureAsset.Object;
+}
+
+5. 粒子特效
+cpp
+// 查找并加载粒子特效资源
+static ConstructorHelpers::FObjectFinder<UParticleSystem> ParticleAsset(TEXT("/Game/MyFolder/MyParticleSystem"));
+if (ParticleAsset.Succeeded())
+{
+    UParticleSystem* MyParticleSystem = ParticleAsset.Object;
+}
+
+6. 音频
+cpp
+// 查找并加载音频资源
+static ConstructorHelpers::FObjectFinder<USoundWave> SoundAsset(TEXT("/Game/MyFolder/MySound"));
+if (SoundAsset.Succeeded())
+{
+    USoundWave* MySound = SoundAsset.Object;
+}
+
+7. 动画蓝图
+cpp
+// 查找并加载动画蓝图资源
+static ConstructorHelpers::FObjectFinder<UAnimBlueprint> AnimBlueprintAsset(TEXT("/Game/MyFolder/MyAnimBlueprint"));
+if (AnimBlueprintAsset.Succeeded())
+{
+    UAnimBlueprint* MyAnimBlueprint = AnimBlueprintAsset.Object;
+}
+
+8. 关卡
+cpp
+// 查找并加载关卡资源
+static ConstructorHelpers::FObjectFinder<ULevel> LevelAsset(TEXT("/Game/MyFolder/MyLevel"));
+if (LevelAsset.Succeeded())
+{
+    ULevel* MyLevel = LevelAsset.Object;
+}
